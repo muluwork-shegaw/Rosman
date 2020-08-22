@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>RossMann</title>
+  <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='style.css')}}">
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" ></script>
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+</head>
+
+<body>
+  <div class="card prediction-card">
+    <div >
+      <h4>Rossman Sales forcast</h4>
+    </div>
+   
+      <div>
+        <input type="text" id="from" placeholder="From" required="required" class="inputs date-input"
+          data-dd-theme="mine" />
+        <input type="text" id="to" placeholder="To" required="required" class="inputs date-input2"
+          data-dd-theme="mine" />
+      </div>
+      <button type="submit" id="btn" class="btn series-submit submit">
+        Forcast
+      </button>
+   
+  </div>
+  <div class="card forcast">
+    <p class="forcast-description">Loading the prediction...</p>
+  </div>
+<script>
+var show_table = function(dates, prediction){
+
+var $table = $('#t-body');
+
+for (var i = 0; i < dates.length ; i++) {
+    $table.append('<tr> <td>' + dates[i] + '</td> <td>' + prediction[i] + '</td></tr>');
+}
+
+}
+
+
+$("#btn").click(function(){
+  console.log("request sent")
+  var from_date = $('#from').val();
+  var to_date = $('#to').val();
+  console.log("request sent_2")
+
+ 
+  var my_data = {
+    from_date: from_date,
+    to_date: to_date,
+  }
+console.log("request sent_2")
+
+if (from_date != "" && to_date != ""){
+    $.post('/predict_test',my_data,function(data, status){
+      console.log(data.dates)
+      $('.forcast').html('<canvas class="forcast-chart"></canvas><p class="table-title">Prediction Result</p><table id="summaryOfResults"><tbody id="t-body"><tr><th>date</th><th>forcasted sale($)</th></tr></tbody></table>')
+      show_table(data.dates, data.prediction)
+
+       });
+}
+else{
+  alert("fill the required inputs!")
+}
+});
+$( function() {
+      from = $( "#from" )
+        .datepicker({
+          dateFormat: 'yy-mm-dd', 
+          defaultDate: "+1w",
+          changeMonth: true,
+          // numberOfMonths: 3
+        })
+        .on( "change", function() {
+          to.datepicker( "option", "minDate", getDate( this ));
+        }),
+      to = $( "#to" ).datepicker({
+        dateFormat: 'yy-mm-dd', 
+         defaultDate: "+1w",
+        changeMonth: true,
+        // numberOfMonths: 3
+      })
+      .on( "change", function() {
+        from.datepicker( "option", "maxDate", getDate( this ) );
+      });
+
+ 
+    function getDate( element ) {
+      return element.value
+    }
+  } );
+
+</script>
+
+</body>
+
+</html>

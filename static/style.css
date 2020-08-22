@@ -1,0 +1,96 @@
+body{
+    background-color: #1d4264;
+    font-family: 'Barlow', sans-serif;
+    padding-left: 20%;
+
+}
+
+
+
+
+.card{
+    background-color: white;
+    width:60% ;
+    box-shadow: 3px 3px 6px #00000040;
+    margin: 15px 0px;
+    padding:20px 37px;
+    font-size: 97%;
+    color: #333E50;
+    padding-left: 10%;
+
+}
+
+.prediction-card{
+    height:250px;
+}
+
+.active-predict-tab{
+    visibility: visible;
+}
+
+.inputs{
+    border:none;
+    border-bottom:1px solid grey;
+    margin:0px 20px 24px 0px;
+    outline:none;
+    width: 260px;
+    padding-top: 32px;
+
+
+}
+.inputs:focus{
+    outline:none;
+    border-bottom:1.5px solid #333E50;
+
+}
+
+.submit{
+    background-color: #1d4264;
+    color: white;
+    height: 35px;
+    width:120px;
+    padding:0px;
+}
+
+
+
+
+/* .forcast-description{
+    text-align: center;
+    color: grey;
+} */
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #333E50;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #D9E4F8;
+  }
+
+  .table-title{
+      color: #333E50;
+      margin-top:35px;
+      font-size: 120%;
+  }
+  
+  .loading-hidden{
+      visibility: hidden;
+  }
+  .loading-active{
+      visibility: visible;
+  }
+
+  .stats-title{
+    color: #333E50;
+    margin-top:35px 0px;
+    font-size: 120%;
+  }
