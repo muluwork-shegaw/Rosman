@@ -23,13 +23,18 @@ def predict_test():
     dates_df = pd.DataFrame(mydates, columns = ["ds"])
 
 
-    forcast = model.predict(dates_df)
-    result = forcast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']]
-    result['ds'] = result['ds'].dt.strftime('%Y-%m-%d')
+#     forcast = model.predict(dates_df)
+#     result = forcast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']]
+#     result['ds'] = result['ds'].dt.strftime('%Y-%m-%d')
 
-    dates = result.ds.to_list()
-    prediction = result.yhat.to_list()
+#     dates = result.ds.to_list()
+#     prediction = result.yhat.to_list()
 
+    data = pd.read_csv('forcasted.csv')
+    forcast = data[(data.ds >= from_date) & (data.ds <= to_date) ]
+    dates = forcast.ds.to_list()
+
+    prediction = forcast.yhat.to_list()
 
     prediction = [ round(elem, 2) for elem in prediction ]
     
